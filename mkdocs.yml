@@ -1,0 +1,29 @@
+site_name: HiveFabric Documentation
+site_url: https://yourusername.github.io/hive-docs
+theme:
+  name: material
+  palette:
+    scheme: default
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - AgentFabric:
+      - Introduction: agentfabric/index.md
+      - Runtime Spec: agentfabric/spec.md
+      - SDK / API: agentfabric/sdk.md
+      - Examples: agentfabric/examples.md
+  - Executors:
+      - Introduction: executors/index.md
+      - Mobile: executors/mobile.md
+      - Desktop: executors/desktop.md
+      - Security: executors/security.md
+  - Marketplace: marketplace.md
+  - Architecture: architecture.md
+  - FAQ: faq.md
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+plugins:
+  - search
