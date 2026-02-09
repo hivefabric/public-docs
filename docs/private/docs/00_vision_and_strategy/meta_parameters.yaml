@@ -1,0 +1,15 @@
+environments:
+  staging:
+    description: "Pre-production environment for validating agent updates, QA, and deployment rehearsals. Plays the role of 90% testing allocation."
+    compute_budget_pct: 90
+    allocation_notes: "Dedicated to integration, security, and e2e suites. Auto-scaling kept aligned with telemetry alerts; humans reset thresholds when exissions affect cost/performance trade-offs."
+  production:
+    description: "Live environment for serving marketplace and user workloads. Contains 80% of development/maintenance compute budget for deploy and monitoring tasks."
+    compute_budget_pct: 80
+    allocation_notes: "Supports running core services (Control Plane, Scheduler, Executors) under open-source tooling. Cost increases require legislative approval when exceeding thresholds."
+compute_policy:
+  meta_budget_control: "Budgets are dynamic; meta agents may adjust them per the approved thresholds. Current target is to keep 80% of company compute aligned with development efforts and 90% of staging compute for testing workloads."
+  adjustment_workflow: "Telemetry Steward recommends adjustments via tickets. Any change affecting resource allocation between company (meta) agents and user multi-tenant execution requires human approval."
+cost_control:
+  emphasis: "Open-source runtimes and local execution are favored to keep expenses minimal while maintaining required performance."
+  decision_consultation: "When cost vs. performance trade-offs arise (e.g., introducing proprietary services), AI agents must pause and prepare a brief for human legislators."

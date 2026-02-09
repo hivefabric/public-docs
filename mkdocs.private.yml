@@ -1,0 +1,73 @@
+site_name: HiveFabric Documentation (Private)
+site_url: https://yourusername.github.io/hive-docs-private
+theme:
+  name: material
+  palette:
+    scheme: default
+nav:
+  - Home: index.md
+  - Overview: overview.md
+  - AgentFabric:
+      - Introduction: agentfabric/index.md
+      - Runtime Spec: agentfabric/spec.md
+      - SDK / API: agentfabric/sdk.md
+      - Examples: agentfabric/examples.md
+  - Executors:
+      - Introduction: executors/index.md
+      - Mobile: executors/mobile.md
+      - Desktop: executors/desktop.md
+      - Security: executors/security.md
+  - Marketplace: marketplace.md
+  - Architecture: architecture.md
+  - FAQ: faq.md
+  - Private:
+      - About: private/README.md
+      - Access Control: private/PRIVATE_NOTICE.md
+      - Current Status: private/current_status.md
+      - Demos:
+          - Overview: private/demos/README.md
+          - Quickstart: private/demos/quickstart_current.md
+          - Demo Script: private/demos/demo_script.md
+          - Investor Overview: private/demos/investor_overview.md
+      - Use Cases: private/usecases/README.md
+      - Questions:
+          - Pre-code Checklist: private/questions_for_humans/pre_code_checklist.md
+          - Legislators: private/questions_for_humans/questions_for_legislators.md
+      - LLM Personas: private/llm_personas/README.md
+      - Internal Docs:
+          - Manifesto: private/docs/00_vision_and_strategy/00_manifesto.md
+          - Mission and Vision: private/docs/00_vision_and_strategy/01_mission_and_vision.md
+          - Core Philosophy: private/docs/00_vision_and_strategy/02_core_philosophy.md
+          - Business Model: private/docs/00_vision_and_strategy/03_business_model.md
+          - Risks and Mitigations: private/docs/00_vision_and_strategy/04_risks_and_mitigations.md
+          - Governance and Roles: private/docs/00_vision_and_strategy/05_governance_and_roles.md
+          - Immutable Rules: private/docs/00_vision_and_strategy/06_immutable_rules.md
+          - Naming Conventions: private/docs/00_vision_and_strategy/07_naming_conventions.md
+          - Module Names (AI): private/docs/00_vision_and_strategy/08_module_names_for_ai.md
+          - Module Names (Humans): private/docs/00_vision_and_strategy/09_module_names_for_humans.md
+          - Product Overview: private/docs/01_product/01_product_overview.md
+          - Marketplace Vision: private/docs/01_product/02_marketplace_vision.md
+          - Gap Analysis: private/docs/01_product/03_gap_analysis.md
+          - Roadmap: private/docs/01_product/04_roadmap.md
+          - System Overview: private/docs/02_architecture/01_system_overview.md
+          - Control Plane: private/docs/02_architecture/02_control_plane.md
+          - Executor Runtime: private/docs/02_architecture/03_executor_runtime.md
+          - Agent Model: private/docs/02_architecture/04_agent_model.md
+          - Scheduling Model: private/docs/02_architecture/05_scheduling_model.md
+          - LLM Strategy: private/docs/02_architecture/06_llm_strategy.md
+          - Operational Autonomy: private/docs/02_architecture/07_operational_autonomy.md
+          - Engineering Playbook: private/docs/03_engineering/01_engineering_playbook.md
+          - Project Build Guide: private/docs/03_engineering/02_project_build_guide.md
+          - MCP Servers: private/docs/03_engineering/03_mcp_servers.md
+          - Technical Catalog: private/docs/03_engineering/04_technical_catalog/README.md
+          - Honeycomb Features: private/docs/03_engineering/04_technical_catalog/honeycomb_features.md
+          - Repo Map: private/docs/03_engineering/04_technical_catalog/repo_map.md
+          - Process Steps: private/docs/03_engineering/05_process_steps.md
+          - Cost Strategy: private/docs/04_finance/01_cost_strategy.md
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+plugins:
+  - search

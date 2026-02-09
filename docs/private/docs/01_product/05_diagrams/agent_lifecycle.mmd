@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant Architect
+  participant ControlPlane
+  participant Executor
+  participant QA
+  participant Telemetry
+
+  Architect->>ControlPlane: Defines objective
+  ControlPlane->>Executor: Schedules agent
+  Executor->>QA: Reports execution
+  QA->>Telemetry: Emits metrics
+  Telemetry->>Architect: Feedback & ticket
+  Architect->>ControlPlane: Adjust scheduling

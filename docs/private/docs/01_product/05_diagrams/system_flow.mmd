@@ -1,0 +1,14 @@
+flowchart TD
+  Client[Clients / UIs]
+  ControlPlane[Control Plane (Honeycomb)]
+  Scheduler[Scheduler / Queen Bee]
+  Telemetry[Telemetry Bus (NATS -> Loki/ClickHouse)]
+  Executors[Executor Runtimes]
+  QA[QA Conductor]
+
+  Client --> ControlPlane
+  ControlPlane --> Scheduler
+  Scheduler --> Executors
+  Executors --> Telemetry
+  Telemetry --> QA
+  QA --> ControlPlane
