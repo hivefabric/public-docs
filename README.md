@@ -4,9 +4,9 @@ This repository contains the public documentation for HiveFabric and AgentFabric
 
 ## Structure
 
-- `docs/` holds all MkDocs content.
+- `docs/public/` holds the public documentation.
 - `docs/private/` holds internal-only documentation (AI/humans, demos, current status, internal architecture notes).
-- Public docs live at the root of `docs/` (outside `docs/private/`).
+- `docs/` contains only the public/private folders and shared assets.
 
 ## MkDocs configs
 

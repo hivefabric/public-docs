@@ -5,21 +5,21 @@ theme:
   palette:
     scheme: default
 nav:
-  - Home: index.md
-  - Overview: overview.md
-  - AgentFabric:
-      - Introduction: agentfabric/index.md
-      - Runtime Spec: agentfabric/spec.md
-      - SDK / API: agentfabric/sdk.md
-      - Examples: agentfabric/examples.md
-  - Executors:
-      - Introduction: executors/index.md
-      - Mobile: executors/mobile.md
-      - Desktop: executors/desktop.md
-      - Security: executors/security.md
-  - Marketplace: marketplace.md
-  - Architecture: architecture.md
-  - FAQ: faq.md
+  - Home: public/index.md
+  - Getting Started: public/getting-started.md
+  - Concepts: public/concepts.md
+  - Architecture: public/architecture.md
+  - Components:
+      - Honeycomb: public/components/honeycomb.md
+      - Stinger: public/components/stinger.md
+      - Wax: public/components/wax.md
+      - Beekeeper: public/components/beekeeper.md
+      - Honeybee: public/components/honeybee.md
+  - APIs: public/apis.md
+  - Executors: public/executors.md
+  - Roadmap: public/roadmap.md
+  - FAQ: public/faq.md
+  - Glossary: public/glossary.md
   - Private:
       - About: private/README.md
       - Access Control: private/PRIVATE_NOTICE.md
