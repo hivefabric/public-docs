@@ -20,6 +20,19 @@ Template:
   - <risk or gap to address>
 ```
 
+- Release: Early Prototypes (Honeycomb + Stinger + UIs + Queen Bee)
+  Date: 2026-02-10
+  Milestones Achieved: M1 (partial), M0 (partial)
+  Highlights:
+  - First prototype of Honeycomb ↔ Stinger communication (control plane + client loop).
+  - First iteration of a polished Honeycomb-facing UI (Beekeeper).
+  - Started Honeybee UI shell (early console scaffold).
+  - Queen Bee v0 to run tasks remotely via Telegram/CLI.
+  Next Iteration Guidelines:
+  - Stabilize API contracts between Honeycomb and Stinger; add compatibility tests.
+  - Formalize UI integration points and error handling (shared API client patterns).
+  - Define Queen Bee task lifecycle and security constraints for production use.
+
 ## Milestones (Roadmap)
 
 ## Near-Term (0-3 months)
