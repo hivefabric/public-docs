@@ -45,6 +45,7 @@ nav:
           - Naming Conventions: private/docs/00_vision_and_strategy/07_naming_conventions.md
           - Module Names (AI): private/docs/00_vision_and_strategy/08_module_names_for_ai.md
           - Module Names (Humans): private/docs/00_vision_and_strategy/09_module_names_for_humans.md
+          - Founder Conversation Context: private/docs/00_vision_and_strategy/10_founder_conversation_context.md
           - Product Overview: private/docs/01_product/01_product_overview.md
           - Marketplace Vision: private/docs/01_product/02_marketplace_vision.md
           - Gap Analysis: private/docs/01_product/03_gap_analysis.md
@@ -56,6 +57,7 @@ nav:
           - Scheduling Model: private/docs/02_architecture/05_scheduling_model.md
           - LLM Strategy: private/docs/02_architecture/06_llm_strategy.md
           - Operational Autonomy: private/docs/02_architecture/07_operational_autonomy.md
+          - Canonical Domain and Repo Model: private/docs/02_architecture/08_canonical_domain_and_repo_model.md
           - Engineering Playbook: private/docs/03_engineering/01_engineering_playbook.md
           - Project Build Guide: private/docs/03_engineering/02_project_build_guide.md
           - MCP Servers: private/docs/03_engineering/03_mcp_servers.md
