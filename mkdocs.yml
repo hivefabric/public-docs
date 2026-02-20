@@ -1,5 +1,6 @@
 site_name: HiveFabric Documentation
 site_url: https://yourusername.github.io/hive-docs
+docs_dir: .
 theme:
   name: material
   palette:
