@@ -1,27 +1,30 @@
 # Architecture Overview
 
-HiveFabric follows an infrastructure-first architecture for distributed edge compute.
+Hive currently runs as a control-plane + node runtime model with IAM-scoped APIs and marketplace-backed skills.
 
-## Core Hierarchy
+## Runtime Topology
 
-- **HiveFabric**: platform boundary.
-- **Hive**: federated compute domain (`GLOBAL` or `PRIVATE`).
-- **Honeycomb**: owner-scoped cluster inside a hive.
-- **Comb**: machine/node in a honeycomb.
-- **Cell**: ephemeral isolated execution unit.
-- **Agent (Bee)**: capability unit executed 1:1 in a cell.
+- `hive-control-plane/service`: scheduler, task state manager, node registry, metrics, task streaming.
+- `comb-node`: execution runtime that registers, heartbeats, receives task dispatch, and reports task events.
+- `hive-control-plane/ui`: operator UI for node/task state.
+- `apiary-market/service` + `apiary-market/ui`: skill catalog and OCI-oriented packaging/indexing toolchain.
+- `honeycomb/service` + `honeycomb/ui`: user app layer (auth, role-routed messaging, embedded node controls, loop scaffold).
 
-## Control Planes
+## Canonical Contracts
 
-- **Queen Bee (Hive level)**: federation and cross-honeycomb scheduling.
-- **Honeybee (Honeycomb level)**: local scheduling and cell lifecycle.
+- Node lifecycle: lease-based register + heartbeat + automatic expiry.
+- Task lifecycle: `Created -> Queued -> Scheduled -> Running -> Succeeded|Failed|TimedOut -> Retried|Cancelled`.
+- Identity: API keys and roles resolved through IAM; no parallel identity model.
+- Scheduling: control-plane is state-driven and places tasks on eligible nodes by capability and scope.
 
-## Runtime and Security
+## Execution Boundaries
 
-- All cell execution is sandboxed in Wax (WASM runtime).
-- Scheduling respects device/resource limits configured by users.
-- Encrypted transport and signed messaging are mandatory design goals.
+- Control-plane owns scheduling and task state transitions.
+- Nodes execute and report completion/events, but do not own scheduler state.
+- Worker-scoped flows are restricted to user-owned nodes; platform flows remain admin-gated.
 
-## Current Status
+## Current Maturity
 
-The codebase is in active transition from early single-service prototypes to this bounded-context model. See private architecture docs for canonical data model and repository boundaries.
+- Control-plane task execution and status transitions are functional for manual/UAT flows.
+- Marketplace and Honeycomb app are scaffolded and integrated at API level.
+- Persistence remains lightweight/in-memory for core state in current iteration.

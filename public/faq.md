@@ -2,27 +2,29 @@
 
 ## What is Hive?
 
-Hive is a distributed platform for orchestrating autonomous agent workloads across heterogeneous devices. The current focus is on building a reliable control plane and node telemetry layer.
+Hive is a distributed platform for orchestrating agent workloads across user-owned and platform-managed nodes, with IAM-scoped scheduling and marketplace-packaged skills.
 
 ## What is running today?
 
-- Honeycomb control plane with REST APIs
-- Stinger SDK for comb registration and heartbeat reporting
-- Beekeeper UI for live comb/task visibility
+- `hive-control-plane` backend + UI
+- `comb-node` runtime with registration, heartbeat, and execution reporting
+- `apiary-market` service + UI catalog prototype
+- `honeycomb` backend + UI scaffold with role-routed messaging
 
 ## Is the marketplace live?
 
-Not yet. Marketplace and economics are planned and are not active in the current release.
+An initial Apiary service/UI is available for skill catalog flows. Full production marketplace controls (signatures, policy, economics) are still maturing.
 
 ## Does Wax execute real workloads today?
 
-Wax exists as a Rust runtime crate. Integration with Honeybee and task execution is in progress.
+Task execution is wired through control-plane and comb-nodes for UAT-level workflows. Runtime hardening is still in progress.
 
 ## Where should I start?
 
-- Start the control plane: `hive/crates/ms-honeycomb`
-- Start combs: `hive/crates/sdk-stinger`
-- Open Beekeeper: `ui-beekeeper`
+- Start control-plane: `hive-control-plane`
+- Start apiary: `apiary-market`
+- Start comb nodes: `comb-node`
+- Start app layer: `honeycomb`
 
 ## How do I contribute?
 

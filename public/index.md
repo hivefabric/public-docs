@@ -1,25 +1,22 @@
 # Hive Platform Documentation
 
-This is the public documentation for Hive and HiveFabric. It focuses on what developers and operators need to run the system, integrate with the APIs, and understand the core components.
+Public documentation for the current Hive stack: control-plane scheduling, node execution, marketplace APIs, and Honeycomb app integration.
 
-## What you can do today
+## What works today
 
-- Run the Honeycomb control plane locally or in Docker
-- Register combs (nodes) and send heartbeats via the Stinger SDK
-- Visualize combs and tasks in Beekeeper
-- Inspect the REST API for comb and task telemetry
+- `hive-control-plane` service for node registration, task lifecycle, scheduling, usage metrics, and task streams.
+- `comb-node` execution nodes registering via IAM API keys and lease-based heartbeats.
+- `hive-control-plane/ui` for node/task visibility.
+- `apiary-market/service` + `apiary-market/ui` skill catalog prototype.
+- `honeycomb/service` + `honeycomb/ui` app scaffold for login, messaging, embedded node controls, and Telegram bridge.
 
 ## Start here
 
 - Getting started: `public/getting-started.md`
 - Architecture overview: `public/architecture.md`
-- Components catalog: `public/components/honeycomb.md`
 - API reference: `public/apis.md`
+- Roadmap: `public/roadmap.md`
 
-## Repositories
+## Scope note
 
-- `hive` (Rust core): Honeycomb, Stinger, Wax
-- `ui-beekeeper`: Control-plane UI
-- `ui-honeybee`: UI shell (future runtime host)
-
-If you need deeper internal notes, roadmap details, or AI collaboration docs, those live in the private documentation.
+Public docs describe stable and testable contracts. Internal planning, detailed status, and architecture decisions are tracked in `docs/private/`.

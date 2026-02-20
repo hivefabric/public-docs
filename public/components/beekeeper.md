@@ -1,21 +1,21 @@
-# Beekeeper (Control Plane UI)
+# Control Plane UI
 
-Beekeeper is the React-based UI for Honeycomb. It visualizes comb inventory, task queue, and API activity.
+The control-plane UI visualizes nodes, task status, and scheduling outcomes.
 
 ## Run locally
 
 ```bash
-cd ui-beekeeper
+cd hive-control-plane/ui
 npm install
-VITE_API_BASE_URL=http://localhost:8080 npm run dev -- --host 127.0.0.1
+npm run dev
 ```
 
-Beekeeper defaults to port `5173`.
+Default port: `5175` (config-dependent).
 
 ## What it shows
 
-- Active combs with the latest report
-- Pending tasks from the Honeycomb queue
-- Live polling controls and telemetry views
+- Node inventory and capabilities (`/api/nodes`)
+- Task lifecycle and assignment state (`/api/tasks`)
+- Queue/execution timing and recent logs
 
-See `ui-beekeeper/README.md` for build and production details.
+See `hive-control-plane/ui/README.md` for environment and deployment details.

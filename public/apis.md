@@ -1,91 +1,74 @@
 # API Reference (Public)
 
-This page documents the Honeycomb REST endpoints used by Stinger and Beekeeper. The API is intentionally small and focused.
+This page documents currently available local/dev APIs.
 
-## Base URL
+## Hive Control Plane (`http://localhost:8080`)
 
-Default: `http://localhost:8080`
+Auth headers expected by most endpoints:
 
-## Endpoints
+- `x-api-key: <key>`
+- `x-user-role: admin|user`
 
-### `GET /health`
+Core endpoints:
 
-Returns `200 OK` if the service is running.
+- `GET /healthz`
+- `GET /api/nodes`
+- `POST /api/nodes/register`
+- `POST /api/nodes/heartbeat`
+- `GET /api/tasks`
+- `POST /api/tasks/create`
+- `POST /api/tasks/{task_id}/events`
+- `GET /api/tasks/{task_id}/stream` (websocket)
+- `POST /api/workflows/submit`
+- `POST /api/prompts/queen-bee` (admin/platform-scoped)
+- `POST /api/prompts/worker-bee` (user-scoped, sandboxed)
+- `GET /api/usage/summary`
+- `GET /metrics`
+- `GET /metrics/prometheus`
+- `GET /api-doc/openapi.json`
+- `GET /swagger-ui`
 
-### `POST /combs/register`
-
-Registers a comb and stores its initial report.
-
-**Request body** (example):
-
-```json
-{
-  "id": "comb-123",
-  "metadata": {
-    "owner_id": "local",
-    "device_type": "container",
-    "os": "linux",
-    "arch": "amd64",
-    "runtime_version": "0.1.0"
-  },
-  "cpu": {"cores": 2, "threads": 2, "model": "container-cpu", "freq_mhz": 2400},
-  "memory": {"total_mb": 2048, "available_mb": 1024},
-  "gpu": {"present": false, "model": "", "vram_mb": 0, "compute_capability": ""},
-  "storage": {"total_gb": 10, "free_gb": 5},
-  "power": {"source": "ac", "battery_percent": 100, "thermal_state": "normal"},
-  "network": {"type": "ethernet", "uplink_mbps": 100.0, "downlink_mbps": 100.0, "latency_ms": 5},
-  "availability": {"uptime_seconds": 120, "cpu_percent": 5.0, "mem_percent": 20.0, "capacity_score": 0.8},
-  "location": {"country": "US", "region": "CA", "city": "San Francisco", "timezone": "America/Los_Angeles", "region_hint": "us-west"},
-  "local_models": []
-}
-```
-
-### `POST /combs/heartbeat`
-
-Sends a heartbeat for a comb. The report payload is optional.
-
-**Request body** (example):
+Simplified task creation payload example:
 
 ```json
 {
-  "id": "comb-123",
-  "report": null
+  "task_id": "00000000-0000-0000-0000-000000000123",
+  "agent": "queen-bee-advanced",
+  "description": "Plan distributed execution for project X"
 }
 ```
 
-### `GET /combs`
+## Honeycomb Service (`http://localhost:8090` by default)
 
-Lists active combs and their most recent report.
+User app API:
 
-**Response** (example):
+- `POST /api/login`
+- `GET /api/dashboard`
+- `POST /api/messages`
+- `POST /api/tasks/submit`
+- `GET /api/loop/status`
+- `POST /api/loop/run-once`
+- `POST /api/loop/enabled`
+- `GET /api/embedded-node/status`
+- `POST /api/embedded-node/start`
+- `POST /api/embedded-node/stop`
 
-```json
-{
-  "combs": [
-    {
-      "id": "comb-123",
-      "last_heartbeat": "2026-02-09T22:10:00Z",
-      "status": "active",
-      "report": {"id": "comb-123", "metadata": {"owner_id": "local", "device_type": "container", "os": "linux", "arch": "amd64", "runtime_version": "0.1.0"}}
-    }
-  ]
-}
-```
+## Apiary Service (`http://localhost:8090` in Apiary stack)
 
-### `GET /tasks`
+Catalog API:
 
-Lists pending tasks in the queue.
+- `GET /healthz`
+- `GET /api/skills`
+- `GET /api/skills/search?q=...`
+- `POST /api/skills`
 
-**Response** (example):
+Role hints:
 
-```json
-{
-  "tasks": [
-    {"id": "task-1", "payload": "do something", "status": "pending"}
-  ]
-}
-```
+- `x-user-role: user|admin`
+- `x-user-id: <uuid>`
 
-## Versioning
+## Notes
 
-This API is currently unversioned and intended for local/dev usage. Public versioning will be added once the control plane stabilizes.
+- Ports can differ per compose profile.
+- Honeycomb service and Apiary service both default to `8090` in their own stacks; change one port when running both on the same host.
+- Contracts are still evolving; prefer OpenAPI (`/api-doc/openapi.json`) for control-plane service details.

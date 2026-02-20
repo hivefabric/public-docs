@@ -1,24 +1,22 @@
-# Executors and Combs
+# Executors and Nodes
 
-A **comb** is a node capable of executing work. Today, combs primarily report their capabilities and heartbeats via Stinger. As Wax integration matures, combs will also execute WASM tasks.
+A **comb-node** is an executor capable of receiving scheduled tasks from the control-plane.
 
-## What combs report
+## What nodes report
 
-- CPU, memory, storage, and network capacity
-- Power and thermal state
-- Availability metrics (uptime, utilization)
-- Optional local models inventory
+- CPU cores and memory
+- LLM profile hints
+- Node labels and runtime flags (`docker`, `wasm`)
+- Heartbeat timestamps and lease expiry status
 
-## Heartbeat behavior
+## Heartbeat and lease behavior
 
-- Stinger sends a heartbeat at a configured interval
-- Honeycomb stores the latest report per comb
-- Beekeeper visualizes the live status
+- Node registers and receives lease duration.
+- Node heartbeats renew lease.
+- Control-plane removes expired/offline nodes from active scheduling pool.
 
 ## Security model (current)
 
-- No public auth layer yet (local/dev focus)
-- All requests are accepted if the payload is valid
-- Production authentication/authorization is planned
-
-For executor runtime details, see the Wax component page.
+- API key + role checks are enforced through IAM-compatible auth.
+- User-scoped routes are restricted to owned nodes.
+- Platform routes (for Queen Bee and related operations) require elevated roles.

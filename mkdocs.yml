@@ -11,10 +11,10 @@ nav:
   - Architecture: public/architecture.md
   - Components:
       - Honeycomb: public/components/honeycomb.md
-      - Stinger: public/components/stinger.md
-      - Wax: public/components/wax.md
-      - Beekeeper: public/components/beekeeper.md
-      - Honeybee: public/components/honeybee.md
+      - Comb Node: public/components/stinger.md
+      - Runtime: public/components/wax.md
+      - Control Plane UI: public/components/beekeeper.md
+      - Honeycomb UI: public/components/honeybee.md
   - APIs: public/apis.md
   - Executors: public/executors.md
   - Roadmap: public/roadmap.md

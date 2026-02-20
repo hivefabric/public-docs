@@ -1,19 +1,20 @@
 # Core Concepts
 
 ## Comb
-A **comb** is a node that can execute work. In practice, a comb is a device or container that connects to Honeycomb, reports capabilities, and receives tasks.
+A **comb-node** is a worker runtime that registers with control-plane, reports capabilities, and executes assigned tasks.
 
-## Stinger
-The **Stinger SDK** is the client used by combs. It registers a comb and sends heartbeat reports containing CPU, memory, power, and network stats.
+## Control Plane
+The control-plane (`hive-control-plane/service`) owns node registry, task state transitions, scheduling decisions, and execution observability.
 
-## Honeycomb
-**Honeycomb** is the control plane microservice. It exposes REST/gRPC APIs, stores combs and pending tasks, and publishes tasks via NATS.
+## Task Lifecycle
+Tasks follow canonical state transitions in control-plane:
+`Created -> Queued -> Scheduled -> Running -> Succeeded|Failed|TimedOut -> Retried|Cancelled`.
 
-## Wax
-**Wax** is the WASM runtime that executes sandboxed modules. It is under active development and will be embedded by Honeybee.
+## Apiary
+Apiary (`apiary-market`) stores declarative agent/skill definitions and OCI packaging/index metadata for marketplace flows.
 
-## Beekeeper
-**Beekeeper** is the control-plane UI that visualizes comb status and the task queue.
+## Honeycomb App
+Honeycomb app (`honeycomb/service` + `honeycomb/ui`) is the user-facing layer for auth, dashboard, role-routed prompts, and embedded node controls.
 
-## Honeybee
-**Honeybee** is the cross-platform UI shell that will host Wax and orchestrate agent workflows.
+## IAM Scoping
+Identity and role checks are centralized in IAM: admin/platform operations route to Queen Bee, user operations route to Worker Bee with ownership boundaries.

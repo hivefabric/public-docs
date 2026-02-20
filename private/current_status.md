@@ -1,41 +1,43 @@
 # Current Status
 
-**Version/Date:** 2026-02-09
+**Version/Date:** 2026-02-19
 
-## What works now
+## Current Platform Snapshot
 
-- Honeycomb control plane runs via Docker and exposes REST.
-- Stinger SDK can connect and report node properties (CPU/RAM/etc.).
-- Beekeeper UI shows Honeycomb data when connected.
+- `hive-control-plane` exposes IAM-gated APIs for node registration, heartbeat, task creation, prompt routing, workflow submission, usage summary, and task streams.
+- Task model includes lifecycle/timestamps, retries/timeouts, queue and execution timing, and task logs.
+- Scheduler + task manager are wired to dispatch pending tasks to eligible nodes.
+- `honeycomb/service` and `honeycomb/ui` provide login, dashboard, role-based message routing (Queen/Worker), embedded node controls, Telegram bridge, and autonomous loop scaffold.
+- `apiary-market` is refactored as OCI-oriented workspace (`agent-spec`, `packager`, `oci`, `registry-index`) with service/UI prototype endpoints.
 
-## What you can see in a demo
+## What Is Demoable Now
 
-- Live combs registering + heartbeating.
-- Honeycomb REST responses for combs/tasks.
-- Beekeeper UI dashboards updating.
+- Start control-plane backend/UI and register multiple comb nodes.
+- Submit prompt-style tasks (`queen-bee`/`worker-bee`) and inspect task lifecycle via API/UI.
+- Observe queue/execution timing fields and task logs in `/api/tasks`.
+- Run Honeycomb app flow: login, send routed prompt, inspect dashboard.
+- Run Apiary catalog service/UI and browse seeded skills.
 
-## Known limitations
+## Known Gaps
 
-- Honeybee UI install may require manual `npm install` depending on local registry/network.
-- Full WASM execution pipeline is stubbed (runtime-wax has a simple host stub; Wasmtime runtime is optional).
+- Core service state is still in-memory for this iteration; durable persistence is pending.
+- Execution runtime behavior across all agent types remains MVP-level (functional but not hardened).
+- End-to-end UAT scripts are partially manual and need consolidation.
+- Signature enforcement and trust policy for packaged agents are not fully enforced yet.
 
-## Primary user value today
+## Next 3 Execution Tracks
 
-- Real-time visibility into connected nodes (combs) and their capabilities.
-- A working control plane + UI foundation for agent scheduling.
+1. **UAT Reliability (Immediate)**
+   - Make task scheduling/execution completion deterministic under node churn.
+   - Ensure every task records context/input/output logs consistently.
+   - Validate queue/execution timing fields and expose them in UI.
 
-## Supported Features
+2. **Operational Hardening**
+   - Complete stale-node cleanup and stale-task retention flows under load.
+   - Add focused regression tests for lifecycle transitions and scheduler behavior.
+   - Tighten Honeycomb/APIary dockerized runbooks for repeatable manual testing.
 
-### Supported
-
-- Honeycomb control plane REST API
-- Comb registration + heartbeat
-- NATS-backed task queue (plumbed, not fully demoed)
-- Beekeeper UI with live comb data
-
-### Not yet supported / in progress
-
-- Full WASM execution pipeline
-- Task scheduling UI in Beekeeper
-- Multi-tenant auth and permissions
-- Production-grade persistence
+3. **Autonomy + Packaging Maturity**
+   - Promote workflow APIs from scaffold to stable with retry semantics.
+   - Advance Apiary OCI indexing + signature verification path.
+   - Strengthen Worker/Queen capability boundaries and IAM policy coverage.

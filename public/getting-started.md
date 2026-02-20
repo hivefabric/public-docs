@@ -1,66 +1,65 @@
 # Getting Started
 
-This guide gets a local Hive stack running with the control plane, comb clients, and the Beekeeper UI.
+Run a local stack with control-plane backend + UI, Apiary service + UI, and comb nodes.
 
 ## Prerequisites
 
 - Docker + Docker Compose
-- Rust toolchain (optional, for running from source)
-- Node.js 20+ (for Beekeeper and Honeybee UIs)
+- Rust toolchain (for local service runs)
+- Node.js 20+ (for UIs)
 
-## 1. Start Honeycomb (control plane)
-
-From the `hive` repo:
+## 1. Start Hive Control Plane
 
 ```bash
-cd hive/crates/ms-honeycomb
-docker compose up --build
+cd hive-control-plane
+docker compose \
+  -f docker/docker-compose.with-ui-multi-node.yml \
+  -f docker/docker-compose.with-ui-multi-node.local.yml \
+  up -d
 ```
 
-Verify health:
+Verify:
 
 ```bash
-curl -fsS http://localhost:8080/health
+curl -fsS http://localhost:8080/healthz
 ```
 
-## 2. Start comb clients with Stinger
-
-Option A: Docker compose helper (recommended)
+## 2. Start Apiary Service + UI
 
 ```bash
-cd hive/crates/sdk-stinger
-./scripts/run.sh -s 2
+cd apiary-market
+docker compose -f docker/docker-compose.yml up -d apiary-service apiary-ui
 ```
 
-Option B: Run from source
+Verify:
 
 ```bash
-cd hive
-cargo run -p sdk-stinger -- --base-url http://localhost:8080 --id comb-1 --mode both
+curl -fsS http://localhost:8090/healthz
 ```
 
-## 3. Launch Beekeeper UI
+## 3. Start comb nodes
+
+Included in the control-plane multi-node compose stack above.
+
+## 4. Open UIs
+
+- Control plane UI: `http://localhost:5175`
+- Apiary UI: `http://localhost:5176`
+
+## 5. Smoke test task submission
+
+Create a task:
 
 ```bash
-cd ui-beekeeper
-npm install
-VITE_API_BASE_URL=http://localhost:8080 npm run dev -- --host 127.0.0.1
+curl -X POST http://localhost:8080/api/tasks/create \
+  -H 'content-type: application/json' \
+  -H 'x-api-key: dev-hive-key' \
+  -H 'x-user-role: admin' \
+  -d '{"task_id":"00000000-0000-0000-0000-000000000123","agent":"queen-bee-advanced","description":"Plan distributed execution for a hello-world task"}'
 ```
 
-Beekeeper defaults to port `5173`.
-
-## 4. (Optional) Launch Honeybee UI
+List tasks:
 
 ```bash
-cd ui-honeybee
-npm install
-VITE_CONTROL_PLANE_URL=http://localhost:8080 npm run dev
+curl -H 'x-api-key: dev-hive-key' -H 'x-user-role: admin' http://localhost:8080/api/tasks
 ```
-
-## Expected result
-
-- `GET /combs` returns active combs
-- Beekeeper lists combs and their latest report data
-- `GET /tasks` returns the pending tasks queue (if any)
-
-If you see combs but no data, confirm the Stinger base URL and that the Honeycomb container can be reached at `http://localhost:8080`.

@@ -1,13 +1,20 @@
-# Honeybee (UI Shell)
+# Honeycomb UI
 
-Honeybee is the cross-platform UI shell intended to host Wax and orchestrate agent workflows. The current version is a React + Vite app that connects to Honeycomb.
+The current user-facing UI is `honeycomb/ui` (legacy docs may refer to Honeybee).
+
+## What it does
+
+- IAM login/session bootstrap through Honeycomb service.
+- Dashboard for nodes/tasks/status.
+- Message input routed by role (`admin` -> Queen Bee, `user` -> Worker Bee).
+- Embedded node controls exposed through backend APIs.
 
 ## Run locally
 
 ```bash
-cd ui-honeybee
+cd honeycomb/ui
 npm install
-VITE_CONTROL_PLANE_URL=http://localhost:8080 npm run dev
+npm run dev
 ```
 
-Honeybee is intentionally minimal today; it will grow into the primary orchestration UI.
+Set backend URL with `VITE_HONEYCOMB_API_BASE_URL` when needed.

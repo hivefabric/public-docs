@@ -1,42 +1,28 @@
-# Stinger (SDK)
+# Comb Node Runtime
 
-Stinger is a lightweight SDK/CLI that registers combs with Honeycomb and sends periodic heartbeat reports.
+This page describes the current comb-node runtime (historically referred to as Stinger in older docs).
 
-## Usage modes
+## Responsibilities
 
-- `register`: send an initial comb report
-- `heartbeat`: send periodic updates
-- `both`: register + heartbeat
-
-## Run from source
-
-```bash
-cd hive
-cargo run -p sdk-stinger -- --base-url http://localhost:8080 --id comb-123 --mode both
-```
-
-Looping heartbeats:
-
-```bash
-cargo run -p sdk-stinger -- --base-url http://localhost:8080 --id comb-123 --mode heartbeat --loop --interval 15s
-```
+- Authenticate to control-plane using IAM-compatible API key flow.
+- Register node capabilities.
+- Send periodic heartbeats to renew lease.
+- Receive/execute assigned tasks and post task events.
 
 ## Run with Docker
 
 ```bash
-cd hive/crates/sdk-stinger
-docker build -t sdk-stinger:local .
-
-docker run --rm -e STINGER_BASE_URL=http://host.docker.internal:8080 sdk-stinger:local --id comb-1 --mode both
+cd comb-node
+docker compose -f docker/docker-compose.multi-node.yml up -d comb-node-1 comb-node-2
 ```
 
-## Scale combs with Compose
+## Integration points
 
-```bash
-cd hive/crates/sdk-stinger
-./scripts/run.sh -s 5
-```
+- Register: `POST /api/nodes/register`
+- Heartbeat: `POST /api/nodes/heartbeat`
+- Task events: `POST /api/tasks/{task_id}/events`
 
-## Related docs
+## Notes
 
-See `hive/crates/sdk-stinger/README.md` for full CLI flags and environment variables.
+- Heartbeat cadence should remain below lease TTL (typically half-lease interval).
+- Node filtering and task placement are control-plane decisions, not node-local logic.

@@ -1,22 +1,26 @@
 # Roadmap (Public)
 
-This is a high-level view of planned capabilities. It will be updated as the stack matures.
+This roadmap reflects the current post-MVP hardening track.
 
-## Near term
+## Next Milestone
 
-- Harden Honeycomb APIs and add auth
-- Add durable storage for combs and tasks
-- Expand Beekeeper telemetry and filtering
-- Stabilize Wax module execution
+- Stabilize deterministic task execution for UAT:
+- queue/schedule/run/completion reliability
+- richer task logs (context/input/output) and timing
+- scheduler placement visibility
+- Harden node lease cleanup and stale task expiry.
+- Finalize Apiary prototype catalog behavior and publish flow.
+- Complete Honeycomb app wiring for role-routed messaging and embedded-node operations.
 
-## Medium term
+## After That
 
-- Honeybee as the primary orchestration UI
-- Agent lifecycle management (deploy, pause, resume)
-- Task scheduling policies and executor selection
+- Persistent task/node storage and retention policies.
+- More complete workflow orchestration (fork/join + retries + policy controls).
+- Signature verification and stronger trust policies for packaged agents.
+- Mobile-first Honeycomb packaging and operational documentation.
 
-## Longer term
+## Longer Horizon
 
-- Marketplace and economics layer
-- Distributed compute federation across multiple control planes
-- On-device model catalogs and execution policies
+- Marketplace maturity (version resolution, trust metadata, optional economics).
+- Cross-hive federation and broader policy enforcement.
+- Deeper autonomy loop with measurable optimization outcomes.

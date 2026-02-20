@@ -1,46 +1,33 @@
-# Honeycomb (Control Plane)
+# Honeycomb / Control Plane
 
-Honeycomb is the stateless control-plane service. It manages comb registration, heartbeat tracking, and a pending task queue backed by NATS.
+Honeycomb is the control-plane service used by nodes, UIs, and app-layer services.
 
-## What it provides
+## Responsibilities
 
-- Comb registration and heartbeat endpoints
-- In-memory comb registry with last report
-- Task queue and NATS publishing
-- REST + gRPC API surface
+- Node registration/heartbeat with lease renewal and expiry cleanup.
+- Task lifecycle management with scheduler-driven state transitions.
+- Task dispatch to node execution endpoints.
+- Task event ingestion + websocket stream fanout.
+- Role-aware APIs for Queen Bee / Worker Bee prompt submission.
+- Usage and metrics surfaces for observability.
 
-## REST endpoints
+## Main endpoints
 
-- `GET /health`
-- `POST /combs/register`
-- `POST /combs/heartbeat`
-- `GET /combs`
-- `GET /tasks`
+- `GET /healthz`
+- `POST /api/nodes/register`
+- `POST /api/nodes/heartbeat`
+- `GET /api/nodes`
+- `POST /api/tasks/create`
+- `GET /api/tasks`
+- `POST /api/tasks/{task_id}/events`
+- `GET /api/tasks/{task_id}/stream`
+- `POST /api/workflows/submit`
+- `POST /api/prompts/queen-bee`
+- `POST /api/prompts/worker-bee`
+- `GET /api/usage/summary`
 
-## Environment variables
+## Developer surfaces
 
-- `REST_PORT` (default: 8080)
-- `GRPC_PORT` (default: 50051)
-- `NATS_URL` (default: nats://127.0.0.1:4222)
-- `NATS_EMBEDDED` (default: false)
-- `NATS_SERVER_BIN` (default: nats-server)
-- `CONFIG_PATH` (optional)
-- `REGISTER_TEST_DATA` (optional)
-
-## Run with Docker
-
-```bash
-cd hive/crates/ms-honeycomb
-docker compose up --build
-```
-
-## Run from source
-
-```bash
-cd hive
-cargo run -p ms-honeycomb
-```
-
-## Related docs
-
-See `hive/crates/ms-honeycomb/README.md` for full CLI flags and deployment notes.
+- OpenAPI: `GET /api-doc/openapi.json`
+- Swagger UI: `GET /swagger-ui`
+- Metrics: `GET /metrics`, `GET /metrics/prometheus`

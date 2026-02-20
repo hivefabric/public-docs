@@ -11,10 +11,10 @@ nav:
   - Architecture: public/architecture.md
   - Components:
       - Honeycomb: public/components/honeycomb.md
-      - Stinger: public/components/stinger.md
-      - Wax: public/components/wax.md
-      - Beekeeper: public/components/beekeeper.md
-      - Honeybee: public/components/honeybee.md
+      - Comb Node: public/components/stinger.md
+      - Runtime: public/components/wax.md
+      - Control Plane UI: public/components/beekeeper.md
+      - Honeycomb UI: public/components/honeybee.md
   - APIs: public/apis.md
   - Executors: public/executors.md
   - Roadmap: public/roadmap.md
@@ -24,6 +24,9 @@ nav:
       - About: private/README.md
       - Access Control: private/PRIVATE_NOTICE.md
       - Current Status: private/current_status.md
+      - Next Steps Plan: private/next_steps.md
+      - Investor Demo Runbook: private/investor_demo_runbook.md
+      - Vision Execution Backlog: private/vision_execution_backlog.md
       - Demos:
           - Overview: private/demos/README.md
           - Quickstart: private/demos/quickstart_current.md

@@ -1,18 +1,15 @@
-# Wax (Runtime)
+# Runtime (WASM and Task Execution)
 
-Wax is the WASM runtime for executing sandboxed modules. It is designed to be embedded by Honeybee or other host applications.
+Hive executes tasks on comb-nodes with sandboxed runtime constraints. WASM remains the primary portable module target for platform agents.
 
 ## Current status
 
-- Rust crate lives at `hive/crates/runtime-wax`
-- Intended to run WASM tasks in isolation
-- Integration with Honeybee is in progress
+- Task execution pipeline is connected through control-plane scheduling and node event reporting.
+- WASM-centric agent packaging is scaffolded through Apiary metadata and OCI artifacts.
+- Runtime hardening (resource limits, trust policy, and broader module support) is still in progress.
 
-## Build
+## Related modules
 
-```bash
-cd hive
-cargo build -p runtime-wax
-```
-
-As Wax evolves, this section will include runtime APIs and module packaging guidance.
+- `comb-node` for execution host/runtime integration
+- `hive-control-plane/service` for scheduler and lifecycle control
+- `apiary-market` for packaging/index contracts
